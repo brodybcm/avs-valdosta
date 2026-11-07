@@ -345,4 +345,54 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  /* ------------------------------------------------------------------------
+     5. Floating Back-to-Top Widget with SVG Scroll Progress Ring
+     ------------------------------------------------------------------------ */
+  const backToTopBtn = document.createElement('button');
+  backToTopBtn.type = 'button';
+  backToTopBtn.className = 'back-to-top';
+  backToTopBtn.setAttribute('aria-label', 'Back to top');
+  backToTopBtn.innerHTML = `
+    <span class="back-to-top-tooltip" aria-hidden="true">Back to Top</span>
+    <svg class="back-to-top-ring" viewBox="0 0 52 52" aria-hidden="true">
+      <circle class="back-to-top-ring-track" cx="26" cy="26" r="24"></circle>
+      <circle class="back-to-top-ring-progress" cx="26" cy="26" r="24"></circle>
+    </svg>
+    <svg class="back-to-top-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  `;
+  document.body.appendChild(backToTopBtn);
+
+  const progressCircle = backToTopBtn.querySelector('.back-to-top-ring-progress');
+  const circumference = 2 * Math.PI * 24; // ~150.8
+
+  const updateBackToTop = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+    if (scrollTop > 280) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+
+    if (progressCircle && docHeight > 0) {
+      const progress = Math.min(1, Math.max(0, scrollTop / docHeight));
+      const offset = circumference - progress * circumference;
+      progressCircle.style.strokeDashoffset = offset.toFixed(2);
+    }
+  };
+
+  window.addEventListener('scroll', updateBackToTop, { passive: true });
+  window.addEventListener('resize', updateBackToTop, { passive: true });
+  updateBackToTop();
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
 });
