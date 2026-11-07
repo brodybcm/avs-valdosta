@@ -1,0 +1,8 @@
+{
+  "name": "avs-valdosta-modern",
+  "version": "1.0.0",
+  "description": "Modern replacement website for Audio, Video & Security, Inc. (AVS, Inc.) in Valdosta, GA",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
