@@ -63,6 +63,10 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   scroll-padding-top: 96px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -71,7 +75,27 @@ body {
   background-color: var(--bg-light);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  overflow-x: clip;
+}
+
+/* Prevent CSS Grid children from expanding beyond 100% viewport width on mobile */
+.hero-grid > *,
+.promo-split-card > *,
+.local-story-grid > *,
+.contact-layout > *,
+.simulator-grid > *,
+.service-detail-card > *,
+.solutions-grid > *,
+.trust-grid > *,
+.footer-grid > *,
+.form-grid-2 > *,
+.segment-switcher-cards > *,
+.subsystem-cards > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1674,6 +1698,37 @@ button, input, select, textarea {
 }
 
 @media (max-width: 600px) {
+  .container {
+    padding: 0 1rem;
+  }
+  .header-inner {
+    min-height: 68px;
+    gap: 0.5rem;
+  }
+  .brand-logo img {
+    height: 40px;
+  }
+  .header-actions {
+    gap: 0.45rem;
+  }
+  .header-actions .btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  .main-nav {
+    top: 68px;
+  }
+  .eyebrow-badge,
+  .promo-pill {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+  }
+  .btn {
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
+  }
   .solutions-grid,
   .segment-switcher-cards,
   .promo-checklist,
@@ -1688,7 +1743,41 @@ button, input, select, textarea {
     grid-template-columns: repeat(2, 1fr);
   }
   .promo-split-card {
-    padding: 1.75rem 1.25rem;
+    padding: 1.5rem 1.1rem;
+    gap: 1.75rem;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .promo-badge-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+  }
+  .promo-badge-img {
+    width: 96px;
+  }
+  .quick-quote-box {
+    padding: 1.35rem 1.05rem;
+    width: 100%;
+    max-width: 100%;
+  }
+  .simulator-wrapper {
+    padding: 1.25rem 1rem;
+  }
+  .scene-display {
+    padding: 1.25rem 1rem;
+  }
+  .service-detail-content {
+    padding: 1.5rem 1.15rem;
+  }
+  .contact-info-card {
+    padding: 1.5rem 1.15rem;
+  }
+  .van-floating-badge {
+    position: static;
+    border-radius: 0;
+    flex-direction: column;
+    align-items: flex-start;
   }
   .showcase-tabs {
     grid-template-columns: 1fr;
